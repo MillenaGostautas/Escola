@@ -70,9 +70,7 @@ public class Estacionamentinho {
         double conv_saida = hora_saida + min_saida / 60;
         
         this.tempo = Math.ceil(conv_saida - conv_ent);
-        
-        JOptionPane.showMessageDialog(null, "Aqui ó: " + tempo);
-        
+                
         return tempo;
     }
     
