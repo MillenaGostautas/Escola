@@ -8,7 +8,7 @@ public class Eletricidade {
     public int leitAnte;
     public int leitAtual;
     public int difLeitura;
-    public double tusd = 0.3;
+    public double tusd = 0.30;
     public double tw = 0.29;
     public double icm = 0.25;
     public double total;
@@ -61,39 +61,41 @@ public class Eletricidade {
     public double cobranca(double valorParcial, int difLeitura, double tusd, double tw) {
         double tu;
         double w;
+        double cms;
         tu = this.difLeitura * this.tusd;
-        w = this.difLeitura * this.tw;
-        this.valorParcial = this.difLeitura + tu + w;
+        w = Math.ceil(this.difLeitura * this.tw);
+        cms = Math.ceil((tu + w) * 0.25);
+        this.valorParcial = tu + w + cms;
         return valorParcial;
     }
     
-    public double verificaBandeira (int difLeitura, double valorParcial) {
+    public double verificaBandeira (int difLeitura, double valorParcial, double icm) {
         double quasela = 0;
         double icms = 0;
             if (this.difLeitura <= 100){
                 total = valorParcial;
                 corBandeira = "Verde";
             }
-            if (this.difLeitura > 100 && this.difLeitura <= 150) {
-                quasela = valorParcial * 0.013;
-                icms = quasela * 0.25;
+            else if (difLeitura > 100 && difLeitura <= 150) {
+                quasela = Math.ceil(this.valorParcial * 0.013);
+                icms = Math.ceil(quasela * icm);
                 quasela = quasela + icms;
-                total = valorParcial + quasela;
+                total = this.valorParcial + quasela;
                 corBandeira = "Amarela";
 
             }
-            if (this.difLeitura > 150 && this.difLeitura <=200) {
-                quasela = valorParcial * 0.041;
-                icms = quasela * 0.25;
+            else if (this.difLeitura > 150 && this.difLeitura <=200) {
+                quasela = Math.ceil(this.valorParcial * 0.042);
+                icms = Math.ceil(quasela * icm);
                 quasela = quasela + icms;
-                total = valorParcial + quasela;
+                total = this.valorParcial + quasela;
                 corBandeira = "Vermelha - Patamar 1";
             }
             else if (this.difLeitura > 200) {
-                quasela = valorParcial * 0.062;
-                icms = quasela * 0.25;
+                quasela = Math.ceil(this.valorParcial * 0.062);
+                icms = Math.ceil(quasela * icm);
                 quasela = quasela + icms;
-                total = valorParcial + quasela;
+                total = this.valorParcial + quasela;
                 corBandeira = "Vermelha - Patamar 2";
             }
             

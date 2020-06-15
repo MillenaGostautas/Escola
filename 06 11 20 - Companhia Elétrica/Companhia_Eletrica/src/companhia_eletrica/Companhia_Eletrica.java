@@ -16,7 +16,7 @@ public class Companhia_Eletrica {
         
         dados.cobranca(dados.getValorParcial(), dados.getDifLeitura(), dados.getTusd(), dados.getTw());
         
-        dados.verificaBandeira(dados.getDifLeitura(), dados.getValorParcial());
+        dados.verificaBandeira(dados.getDifLeitura(), dados.getValorParcial(), dados.getIcm());
         
         dados.imprimeConta(dados.getLeitAnte(), dados.getLeituraAtual(), dados.getDifLeitura(), dados.getTotal(), dados.getValorParcial(), dados.getCorBandeira());
         
